@@ -15,7 +15,7 @@ function [ cutsignal, diff, ci, mu ] = crossc( s1, s2 )
 %                        Cross-correlation between the two series
 %           figure2   -> plot of 'diff' and 'mu'                   
 
-figure
+% figure
 if (length(s1) >= length(s2))  
     [acor,lag] = xcorr(s2,s1);
 else 
@@ -24,28 +24,28 @@ end
 
 [~,I] = max(abs(acor));
 lagDiff = lag(I);
-subplot(2,1,2)
-plot(lag,acor)
-
-subplot(2,1,1)
+% subplot(2,1,2)
+% plot(lag,acor)
+% 
+% subplot(2,1,1)
 
 if (length(s1) >= length(s2))
     alpower = s1(-lagDiff+1:end);
     cutsignal = alpower(1:length(s2));
-    plot(s2)
-    hold
-    plot(cutsignal)
-    hold
+%     plot(s2)
+%     hold
+%     plot(cutsignal)
+%     hold
 else
     alpower = s2(-lagDiff+1:end);
     cutsignal = alpower(1:length(s1));
-    plot(s1)
-    hold
-    plot(cutsignal)
-    hold
+%     plot(s1)
+%     hold
+%     plot(cutsignal)
+%     hold
 end
 
-figure
+% figure
 if (length(s1) >= length(s2))
 diff = cutsignal-s2;
 
@@ -53,12 +53,12 @@ else
 diff = cutsignal-s1;
 
 end
-plot(diff)
-hold
+% plot(diff)
+% hold
 mu = mean(diff);
-hline = refline([0 mu]);
-hline.Color = 'r';
-hold
+% hline = refline([0 mu]);
+% hline.Color = 'r';
+% hold
 ci = CI(diff);
 
 
