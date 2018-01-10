@@ -8,6 +8,7 @@ maintable = buildtimetable(rawdata, 500, 0.17);
 revtable = buildrevstable(maintable);
 timetable = buildtimeblocktable(maintable,500,15);
 angtable = buildangletable(maintable);
+summary = buildsummary(revtable,wbdata);
 
 clearvars rawdata;
 
@@ -28,7 +29,6 @@ title('Power(W) every 15 sec')
 figure
 subplot(2,1,1)
 polarplot(maintable.AngleRad, maintable.PowerW)
-rlim([0 max(revtable.MaxPowerW)])
 title('Power(W) distribution over time')
 subplot(2,1,2)
 polarplot(angtable.AngleSectorRad,angtable.PowerW)
