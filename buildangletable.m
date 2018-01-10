@@ -11,10 +11,10 @@ output.MaxCadenceRPM = splitapply(@max,timetable.CadenceFiltRPM,timetable.AngleG
 output.MinCadenceRPM = splitapply(@min,timetable.CadenceFiltRPM,timetable.AngleG);
 output.MaxPowerW = splitapply(@max,timetable.PowerFiltW,timetable.AngleG);
 output.MinPowerW = splitapply(@min,timetable.PowerFiltW,timetable.AngleG);
-output.ForceEffLeft = splitapply(@mean,timetable.ForceEffLeft,timetable.AngleG);
-output.ForceEffRight = splitapply(@mean,timetable.ForceEffRight,timetable.AngleG);
-output.ResForceLeftAngleDeg = splitapply(@mean,timetable.ResForceLeftAngleDeg,timetable.AngleG);
-output.ResForceRightAngleDeg = splitapply(@mean,timetable.ResForceRightAngleDeg,timetable.AngleG);
+output.ForceEffLeft = splitapply(@nanmean,timetable.ForceEffLeft,timetable.AngleG);
+output.ForceEffRight = splitapply(@nanmean,timetable.ForceEffRight,timetable.AngleG);
+output.ResForceLeftAngleDeg = splitapply(@nanmean,timetable.ResForceLeftAngleDeg,timetable.AngleG);
+output.ResForceRightAngleDeg = splitapply(@nanmean,timetable.ResForceRightAngleDeg,timetable.AngleG);
 
 end
 
