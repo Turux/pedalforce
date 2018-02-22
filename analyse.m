@@ -36,7 +36,7 @@ timetable = buildtimeblocktable(maintable,500,15);
 angtable = buildangletable(maintable);
 summary = buildsummary(revtable,wbdata);
 
-clearvars rawdata x ax1 ax2 ax3 prompt;
+clearvars rawdata x ax1 ax2 ax3 prompt check;
 
 figure
 subplot(2,1,1)
@@ -112,4 +112,4 @@ plot(wbdata.Heartratebpm)
 title('Heart Rate (BPM)')
 linkaxes([ax1,ax2,ax3],'x')
 
-clearvars newpower diff ax1 ax2 ax3
+clearvars newpower newcadence diff ax1 ax2 ax3 
