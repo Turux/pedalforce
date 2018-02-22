@@ -1,22 +1,32 @@
 close all
-clear all
+clear
 clc
 
 wbdata = wbimport;
 rawdata = rawimport;
 maintable = buildtimetable(rawdata, 500, 0.17);
 check = figure;
-ax1 = subplot(2,1,1);
+ax1 = subplot(3,1,1);
 plot(maintable.Revolution,maintable.CadenceRPM)
 hold on
 plot(maintable.Revolution,maintable.CadenceFiltRPM)
 hold off
-ax2 = subplot(2,1,2);
+legend('Original','Filtered')
+ylabel('Cadence(RPM)')
+ax2 = subplot(3,1,3);
 plot(maintable.Revolution,maintable.PowerW)
 hold on
 plot(maintable.Revolution,maintable.PowerFiltW)
 hold off
-linkaxes([ax1,ax2],'x')
+ylabel('Power(W)')
+ax3 = subplot(3,1,2);
+plot(maintable.Revolution,maintable.TorqueNm)
+hold on
+plot(maintable.Revolution,maintable.TorqueFiltNm)
+hold off
+ylabel('Torque(Nm)')
+xlabel('Revolution')
+linkaxes([ax1,ax2 ax3],'x')
 prompt = 'What range of revolution needs to be delated? ';
 x = input(prompt);
 close(check)
@@ -26,7 +36,7 @@ timetable = buildtimeblocktable(maintable,500,15);
 angtable = buildangletable(maintable);
 summary = buildsummary(revtable,wbdata);
 
-clearvars rawdata x ax1 ax2;
+clearvars rawdata x ax1 ax2 ax3 prompt;
 
 figure
 subplot(2,1,1)
@@ -54,12 +64,14 @@ title('Radial Force Right(N)')
 figure
 subplot(2,1,1)
 polarplot(angtable.AngleSectorRad,angtable.PowerW)
+title('Power (W) Efficiency by Angle (deg)')
 Full = max(angtable.PowerW)*ones(size(angtable.AngleSectorRad));
 Missing=Full-angtable.PowerW;
 hold on
 polarplot(angtable.AngleSectorRad,Full)
 polarplot(angtable.AngleSectorRad,Missing)
 hold off
+legend('Input Power','FullCircle','Missing Power')
 
 WOri = trapz(angtable.AngleSectorRad,angtable.PowerW);
 WMissing = trapz(angtable.AngleSectorRad,Missing);
@@ -72,9 +84,11 @@ W300 = trapz(angtable.AngleSectorRad,angtable.PowerW*3);
 y = [WOri WMissing WFull W120 W190 W275 W300];
 c = categorical({'Original','Missing','FullCircle','120%','190%','275%','300%'});
 subplot(2,1,2)
-bar(c,y)
+bar(c,y);
+ylabel('Energy (J)')
+title('Area under the curve')
 
-clearvars Full Missing x y WOri WMissing WFull W120 W190 W275 W300
+clearvars Full Missing c y WOri WMissing WFull W120 W190 W275 W300
 
 [ newpower, diff, ci, mu ] = crossc( wbdata.PowerW, revtable.PowerFiltW );
 newcadence = crossc( wbdata.Cadencerpm, revtable.CadenceRPM );
@@ -98,4 +112,4 @@ plot(wbdata.Heartratebpm)
 title('Heart Rate (BPM)')
 linkaxes([ax1,ax2,ax3],'x')
 
-clearvars newpower diff
+clearvars newpower diff ax1 ax2 ax3
