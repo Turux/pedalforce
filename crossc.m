@@ -1,4 +1,4 @@
-function [ cutsignal, diff, ci, mu ] = crossc( s1, s2 )
+function [ cutsignal, diff, ci, mu, stmu ] = crossc( s1, s2 )
 
 % @Brief:   A function that executes and plot cross-correlation
 %           between two discrete series (1D arrays).
@@ -29,9 +29,19 @@ lagDiff = lag(I);
 % 
 % subplot(2,1,1)
 
-if (length(s1) >= length(s2))
+if (length(s1) > length(s2))
     alpower = s1(-lagDiff+1:end);
     cutsignal = alpower(1:length(s2));
+
+elseif (length(s1) == length(s2))
+    if(lagDiff == 0)
+        alpower = s1;
+        cutsignal = alpower;
+    else
+    alpower = s1(lagDiff:end);
+    cutsignal = alpower(1:length(s2));
+    end
+    
 %     plot(s2)
 %     hold
 %     plot(cutsignal)
@@ -56,6 +66,7 @@ end
 % plot(diff)
 % hold
 mu = mean(diff);
+stmu = std(diff);
 % hline = refline([0 mu]);
 % hline.Color = 'r';
 % hold
