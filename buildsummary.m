@@ -14,6 +14,9 @@ summarytable.Torque = mean(pedaltable.TorqueNm);
 summarytable.TorqueSD = std(pedaltable.TorqueNm);
 summarytable.HR = mean(wbtable.Heartratebpm);
 summarytable.HRSD = std(wbtable.Heartratebpm);
-
+summarytable.BLR = mean(pedaltable.Balance);
+summarytable.BLRSD = std(pedaltable.Balance);
+summarytable.BLRWB = mean(wbtable.Leftlegpercent);
+summarytable.BLRWBSD = std(wbtable.Leftlegpercent);
 end
 
