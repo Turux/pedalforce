@@ -20,5 +20,3 @@ summarytable.BLRSD = std(pedaltable.Balance);
 summarytable.BLRWB = mean(wbtable.Leftlegpercent);
 summarytable.BLRWBSD = std(wbtable.Leftlegpercent);
 end
-
-exit
