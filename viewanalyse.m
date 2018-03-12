@@ -2,40 +2,11 @@ close all
 clear
 clc
 
-wbdata = wbimport;
-rawdata = rawimport;
-maintable = buildtimetable(rawdata, 500, 0.17);
-check = figure;
-ax1 = subplot(3,1,1);
-plot(maintable.Revolution,maintable.CadenceRPM)
-hold on
-plot(maintable.Revolution,maintable.CadenceFiltRPM)
-hold off
-legend('Original','Filtered')
-ylabel('Cadence(RPM)')
-ax2 = subplot(3,1,3);
-plot(maintable.Revolution,maintable.PowerW)
-hold on
-plot(maintable.Revolution,maintable.PowerFiltW)
-hold off
-ylabel('Power(W)')
-ax3 = subplot(3,1,2);
-plot(maintable.Revolution,maintable.TorqueNm)
-hold on
-plot(maintable.Revolution,maintable.TorqueFiltNm)
-hold off
-ylabel('Torque(Nm)')
-xlabel('Revolution')
-linkaxes([ax1,ax2 ax3],'x')
-prompt = 'What range of revolution needs to be delated? ';
-x = input(prompt);
-close(check)
-maintable  = deleterevolution(maintable, x, 500, 0.17);
-revtable = buildrevstable(maintable);
-timetable = buildtimeblocktable(maintable,500,15);
-angtable = buildangletable(maintable);
+[FileName,PathName] = uigetfile('*.mat','Select the MATLAB save file');
 
-clearvars rawdata x ax1 ax2 ax3 prompt check;
+load (fullfile(PathName,FileName))
+
+clearvars FileName PathName
 
 figure
 subplot(2,1,1);
