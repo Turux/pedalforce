@@ -59,13 +59,18 @@ for k = 4:length(D) % avoid using the first ones
 
     if (exist(fullfile(folder_save,'Overall'),'dir') == 0)
         mkdir(folder_save,'Overall');
-        summary = buildsummary(revtable,wbdata,name);
+        summary = buildsummary(revtable,wbdata,angtable,name);
         save(fullfile(folder_save,'Overall','summary.mat'),'summary')
     else
-        load(fullfile(folder_save,'Overall','summary.mat'))
-        summaryadd = buildsummary(revtable,wbdata,name);
-        summary = [summary;summaryadd];
-        save(fullfile(folder_save,'Overall','summary.mat'),'summary')
+        if (exist(fullfile(folder_save,'Overall','summary.mat'),'file') == 2)
+            load(fullfile(folder_save,'Overall','summary.mat'))
+            summaryadd = buildsummary(revtable,wbdata,angtable,name);
+            summary = [summary;summaryadd];
+            save(fullfile(folder_save,'Overall','summary.mat'),'summary')
+        else
+            summary = buildsummary(revtable,wbdata,angtable,name);
+            save(fullfile(folder_save,'Overall','summary.mat'),'summary')
+        end
 
         clearvars summaryadd;
     end

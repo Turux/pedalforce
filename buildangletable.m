@@ -23,9 +23,13 @@ output.MinPowerW = splitapply(@min,timetable.PowerFiltW,timetable.AngleG);
 output.ForceEffLeft = splitapply(@nanmean,timetable.ForceEffLeft,timetable.AngleG);
 output.ForceEffRight = splitapply(@nanmean,timetable.ForceEffRight,timetable.AngleG);
 output.TanForceLeftN = splitapply(@nanmean,timetable.TanForceLeftN,timetable.AngleG);
+output.TanForceLeftNSD = splitapply(@std,timetable.TanForceLeftN,timetable.AngleG);
 output.TanForceRightN = splitapply(@nanmean,timetable.TanForceRightN,timetable.AngleG);
+output.TanForceRightNSD = splitapply(@std,timetable.TanForceRightN,timetable.AngleG);
 output.RadForceLeftN= splitapply(@nanmean,timetable.RadForceLeftN,timetable.AngleG);
+output.RadForceLeftNSD= splitapply(@std,timetable.RadForceLeftN,timetable.AngleG);
 output.RadForceRightN= splitapply(@nanmean,timetable.RadForceRightN,timetable.AngleG);
+output.RadForceRightNSD= splitapply(@std,timetable.RadForceRightN,timetable.AngleG);
 output.ResForceLeftAngleDeg = splitapply(@nanmean,timetable.ResForceLeftAngleDeg,timetable.AngleG);
 output.ResForceRightAngleDeg = splitapply(@nanmean,timetable.ResForceRightAngleDeg,timetable.AngleG);
 
