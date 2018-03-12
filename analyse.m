@@ -34,7 +34,6 @@ maintable  = deleterevolution(maintable, x, 500, 0.17);
 revtable = buildrevstable(maintable);
 timetable = buildtimeblocktable(maintable,500,15);
 angtable = buildangletable(maintable);
-summary = buildsummary(revtable,wbdata);
 
 clearvars rawdata x ax1 ax2 ax3 prompt check;
 

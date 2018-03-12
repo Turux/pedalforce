@@ -1,8 +1,9 @@
-function [ summarytable ] = buildsummary( pedaltable, wbtable )
+function [ summarytable ] = buildsummary( pedaltable, wbtable, name)
 %SUMMARY Summary of this function goes here
 %   Detailed explanation goes here
 
-summarytable = table(mean(pedaltable.PowerW), 'VariableNames', {'Power'});
+summarytable = table(str2num(name), 'VariableNames', {'Participant'});
+summarytable.Power = mean(pedaltable.PowerW);
 summarytable.PowerSD = std(pedaltable.PowerW);
 summarytable.PowerWB = mean(wbtable.PowerW);
 summarytable.PowerWBSD = std(wbtable.PowerW);

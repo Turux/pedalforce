@@ -1,4 +1,4 @@
-function wbdata = wbimport()
+function wbdata = wbimport(filepath)
 %% Import data from text file.
 % Script for importing data from the following text file:
 %
@@ -11,8 +11,13 @@ function wbdata = wbimport()
 
 %% Initialize variables.
 %filename = '/Users/turux/Loughborough University/(s) Dan Loftus - Cycling performance monitoring and modelling project/2017 Test Results/20171207/Pete 60min/revs.txt';
+if nargin == 0
 [filename, filepath] = uigetfile('*.txt','Select the WattBike File');
 filename = fullfile(filepath, filename);
+else
+filename = dir(fullfile(filepath,'*txt'));
+filename = fullfile(filepath, filename.name);
+end
 delimiter = '\t';
 startRow = 2;
 

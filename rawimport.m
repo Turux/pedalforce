@@ -1,4 +1,4 @@
-function TEST01 = rawimport()
+function TEST01 = rawimport(filepath)
 
 %% Import data from text file.
 % Script for importing data from the following text file:
@@ -12,8 +12,13 @@ function TEST01 = rawimport()
 
 %% Initialize variables.
 %filename = '/Users/turux/Desktop/downsample/20171130_TEST01.tsv';
+if nargin == 0
 [filename, filepath] = uigetfile('*.xls','Select the Pedals Raw File');
 filename = fullfile(filepath, filename);
+else
+filename = dir(fullfile(filepath,'*.xls'));
+filename = fullfile(filepath, filename.name);
+end
 delimiter = '\t';
 startRow = 10;
 
