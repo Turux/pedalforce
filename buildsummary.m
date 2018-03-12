@@ -2,7 +2,7 @@ function [ summarytable ] = buildsummary( pedaltable, wbtable, name)
 %SUMMARY Summary of this function goes here
 %   Detailed explanation goes here
 
-summarytable = table(str2num(name), 'VariableNames', {'Participant'});
+summarytable = table(str2double(name), 'VariableNames', {'Participant'});
 summarytable.Power = mean(pedaltable.PowerW);
 summarytable.PowerSD = std(pedaltable.PowerW);
 summarytable.PowerWB = mean(wbtable.PowerW);
@@ -21,3 +21,4 @@ summarytable.BLRWB = mean(wbtable.Leftlegpercent);
 summarytable.BLRWBSD = std(wbtable.Leftlegpercent);
 end
 
+exit
