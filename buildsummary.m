@@ -59,6 +59,17 @@ summarytable.MaxWastedForceRight = pks(1);
 summarytable.MaxWastefForceRightError = mean(angtable.RadForceRightNSD);
 summarytable.MaxWastedForceRightAngle = locs(1);
 
+[pks, locs] = max([abs(angtable.TanForceLeftN),angtable.AngleSectorDeg]);
+
+summarytable.MaxFroceLeft = pks(1);
+summarytable.MaxForceLeftError = mean(angtable.TanForceLeftNSD);
+summarytable.MaxForceLeftAng = angtable.AngleSectorDeg(locs(1));
+
+[pks, locs] = max([abs(angtable.TanForceRightN),angtable.AngleSectorDeg]);
+
+summarytable.MaxForceRight = pks(1);
+summarytable.MaxForceRightError = mean(angtable.TanForceRightNSD);
+summarytable.MaxForceRightAng = angtable.AngleSectorDeg(locs(1));
 summarytable.PowerSpread = mean(angtable.PowerWSD);
 
 

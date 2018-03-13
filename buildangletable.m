@@ -4,8 +4,8 @@ function [ output ] = buildangletable( timetable )
 
 output = table(unique(timetable.AngleSector),'VariableNames', {'AngleSectorDeg'});
 output.AngleSectorRad = deg2rad(output.AngleSectorDeg);
-output.CadenceRPM = splitapply(@mean,timetable.CadenceFiltRPM,timetable.AngleG);
-output.CadenceRPMSD = splitapply(@std,timetable.CadenceFiltRPM,timetable.AngleG);
+output.CadenceRPM = splitapply(@mean,timetable.CadenceRPM,timetable.AngleG);
+output.CadenceRPMSD = splitapply(@std,timetable.CadenceRPM,timetable.AngleG);
 output.TorqueNm = splitapply(@mean,timetable.TorqueNm,timetable.AngleG);
 output.TorqueNmSD = splitapply(@std,timetable.TorqueNm,timetable.AngleG);
 output.PowerW = splitapply(@mean,timetable.PowerW,timetable.AngleG);
