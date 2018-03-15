@@ -30,10 +30,10 @@ summarytable.BalanceWB = mean(wbtable.Leftlegpercent);
 %summarytable.BalanceWBSD = std(wbtable.Leftlegpercent);
 summarytable.BalanceWBSEM = sem(wbtable.Leftlegpercent);
 
-[ WOri, ~, WMissing, AreaError, Efficency, EfficencyError ] = areaunder(angtable);
+[ WOri, ~, WMissing, AreaError, Efficiency, EfficiencyError ] = areaunder(angtable);
 
-summarytable.Efficency = Efficency;
-summarytable.EfficencyError = EfficencyError;
+summarytable.Efficiency = Efficiency;
+summarytable.EfficiencyError = EfficiencyError;
 summarytable.AreaUnderPower = WOri;
 summarytable.AreaMissingPower = WMissing;
 summarytable.AreaError = AreaError;
