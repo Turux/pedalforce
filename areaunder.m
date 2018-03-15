@@ -14,7 +14,9 @@ W300 = trapz(angtable.AngleSectorRad,angtable.PowerW*3);
 
 Efficency = (WOri/WFull)*100;
 
-AreaError = sqrt((mean(angtable.PowerWSD)).^2+(0.0872665).^2);
+AreaError = sqrt(((angtable.PowerWSD)./angtable.PowerW).^2+(std(angtable.AngleSectorRad)./angtable.AngleSectorRad).^2);
+AreaError = sum(AreaError.^2);
+AreaError = sqrt(AreaError);
 EfficencyError = sqrt((AreaError/WOri).^2+(AreaError/WFull).^2);
 
 end
