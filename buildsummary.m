@@ -30,13 +30,22 @@ summarytable.BalanceWB = mean(wbtable.Leftlegpercent);
 %summarytable.BalanceWBSD = std(wbtable.Leftlegpercent);
 summarytable.BalanceWBSEM = sem(wbtable.Leftlegpercent);
 
-[ WOri, ~, WMissing, AreaError, Efficiency, EfficiencyError ] = areaunder(angtable);
+[ AreaUPower, AreaUPowerError,...
+    AreaUMissing, AreaUMissingError,...
+    EfficiencyMinPower, EfficiencyMinPowerError,...
+    PowerAbove200, PowerAbove200Error,...
+    InefficientSectorPercentage, InefficientSectorPercentageError  ] = areaunder(angtable);
 
-summarytable.Efficiency = Efficiency;
-summarytable.EfficiencyError = EfficiencyError;
-summarytable.AreaUnderPower = WOri;
-summarytable.AreaMissingPower = WMissing;
-summarytable.AreaError = AreaError;
+summarytable.AreaUPower = AreaUPower;
+summarytable.AreaUPowerError = AreaUPowerError;
+summarytable.AreaUMissing = AreaUMissing;
+summarytable.AreaUMissingError = AreaUMissingError;
+summarytable.EfficiencyMinPower = EfficiencyMinPower;
+summarytable.EfficiencyMinPowerError = EfficiencyMinPowerError;
+summarytable.PowerAbove200 = PowerAbove200;
+summarytable.PowerAbove200Error = PowerAbove200Error;
+summarytable.InefficientSectorPercentage = InefficientSectorPercentage;
+summarytable.InefficientSectorPercentageError = InefficientSectorPercentageError;
 
 [~,locs,widths,proms] = findpeaks(angtable.PowerW,angtable.AngleSectorDeg,'SortStr','descend','WidthReference','halfheight');
 
@@ -47,7 +56,7 @@ summarytable.AngMaxPower = locs(1);
 [~,locs] = findpeaks(-angtable.PowerW,angtable.AngleSectorDeg,'SortStr','descend');
 
 summarytable.AngMinPower = locs(1);
-summarytable.AngError = 5;
+summarytable.AngError = 2.5;
 
 [pks,locs] = findpeaks(abs(angtable.RadForceLeftN),angtable.AngleSectorDeg,'SortStr','descend');
 
@@ -75,6 +84,8 @@ summarytable.MaxForceRightAng = angtable.AngleSectorDeg(locs(1));
 summarytable.PowerSpread = mean(angtable.PowerWSD);
 
 
-clearvars Efficency AreaError locs widths proms pks
+clearvars AreaUPower AreaUPowerError locs widths proms pks ...
+    AreaUMissing AreaUMissingError EfficiencyMinPower EfficiencyMinPowerError ...
+    PowerAbove200 PowerAbove200Error InefficientSectorPercentage InefficientSectorPercentageError
 
 end
