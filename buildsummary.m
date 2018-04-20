@@ -29,6 +29,32 @@ summarytable.BalanceSEM = sem(pedaltable.Balance);
 summarytable.BalanceWB = mean(wbtable.Leftlegpercent);
 %summarytable.BalanceWBSD = std(wbtable.Leftlegpercent);
 summarytable.BalanceWBSEM = sem(wbtable.Leftlegpercent);
+summarytable.FWHMLeft = mean(pedaltable.FWHMLeft);
+summarytable.FWHMLeftSEM = sem(pedaltable.FWHMLeft);
+summarytable.FWHMRight = mean(pedaltable.FWHMRight);
+summarytable.FWHMRightSEM = sem(pedaltable.FWHMRight);
+summarytable.RTLeftS = mean(pedaltable.RTLeft);
+summarytable.RTLeftSSEM = sem(pedaltable.RTLeft);
+summarytable.RTRightS = mean(pedaltable.RTRight);
+summarytable.RTRightSSEM = sem(pedaltable.RTRight);
+summarytable.PedalSmoothnessLeft = mean(pedaltable.PedalSmoothnessLeft);
+summarytable.PedalSmoothnessLeftSEM = sem(pedaltable.PedalSmoothnessLeft);
+summarytable.PedalSmoothnessRight = mean(pedaltable.PedalSmoothnessRight);
+summarytable.PedalSmoothnessRightSEM = sem(pedaltable.PedalSmoothnessRight);
+summarytable.TorqueEffectivenessLeft = mean(pedaltable.TorqueEffectivenessLeft);
+summarytable.TorqueEffectivenessLeftSEM = sem(pedaltable.TorqueEffectivenessLeft);
+summarytable.TorqueEffectivenessRight = mean(pedaltable.TorqueEffectivenessRight);
+summarytable.TorqueEffectivenessRightSEM = sem(pedaltable.TorqueEffectivenessRight);
+[ fwhmLeft, ~ ] = fwrt( angtable.PowerLeftW );
+[ fwhmRight, ~ ] = fwrt( angtable.PowerRightW );
+summarytable.FWHMLeftDeg = fwhmLeft.*5;
+summarytable.FWHMRightDeg = fwhmRight.*5;
+[ psLeft,teLeft ] = pste( angtable.PowerLeftW );
+[ psRight,teRight ] = pste( angtable.PowerRightW );
+summarytable.PedalSmoothnessAngLeft = psLeft;
+summarytable.PedalSmoothnessAngRight = psRight;
+summarytable.TorqueEffectivenessAngLeft = teLeft;
+summarytable.TorqueEffectivenessAngRight = teRight;
 
 [ AreaUPower, AreaUPowerError,...
     AreaUMissing, AreaUMissingError,...
@@ -86,6 +112,7 @@ summarytable.PowerSpread = mean(angtable.PowerWSD);
 
 clearvars AreaUPower AreaUPowerError locs widths proms pks ...
     AreaUMissing AreaUMissingError EfficiencyMinPower EfficiencyMinPowerError ...
-    PowerAbove200 PowerAbove200Error InefficientSectorPercentage InefficientSectorPercentageError
+    PowerAbove200 PowerAbove200Error InefficientSectorPercentage ...
+    InefficientSectorPercentageError fwhmLeft fwhmRight psLeft psRight teLeft teRight
 
 end

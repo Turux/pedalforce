@@ -33,5 +33,6 @@ output.RadForceRightNSD= splitapply(@std,timetable.RadForceRightN,timetable.Angl
 output.ResForceLeftAngleDeg = splitapply(@nanmean,timetable.ResForceLeftAngleDeg,timetable.AngleG);
 output.ResForceRightAngleDeg = splitapply(@nanmean,timetable.ResForceRightAngleDeg,timetable.AngleG);
 
+
 end
 

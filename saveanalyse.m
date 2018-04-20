@@ -78,4 +78,11 @@ for k = 4:length(D) % avoid using the first ones
     clearvars filepath folder_data folder_name name ;
 end
 
+% if(exist(fullfile(folder_save,'Overall','Rresults.mat'),'file') == 2)
+%     load(fullfile(folder_save,'Overall','Rresults.mat'))
+%     Rresults = struct2table(Rresults);
+%     summary = [summary,Rresults];
+%     save(fullfile(folder_save,'Overall','summary.mat'),'summary')
+% end
+
 clearvars folder_result folder_save k D currD;
