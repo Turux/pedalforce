@@ -5,7 +5,7 @@ clc
 folder_result = uigetdir('/','Where is the data?');
 D = dir(folder_result);
 folder_save = uigetdir('/','Where do you want to save the results?');
-for k = 4:length(D) % avoid using the first ones
+for k = 3:length(D) % avoid using the first ones
     currD = D(k).name; % Get the current subdirectory name
     folder_data=fullfile(folder_result,currD);
 
@@ -59,16 +59,16 @@ for k = 4:length(D) % avoid using the first ones
 
     if (exist(fullfile(folder_save,'Overall'),'dir') == 0)
         mkdir(folder_save,'Overall');
-        summary = buildsummary(revtable,wbdata,angtable,name);
+        summary = buildsummary(revtable,wbdata,angtable,maintable,name);
         save(fullfile(folder_save,'Overall','summary.mat'),'summary')
     else
         if (exist(fullfile(folder_save,'Overall','summary.mat'),'file') == 2)
             load(fullfile(folder_save,'Overall','summary.mat'))
-            summaryadd = buildsummary(revtable,wbdata,angtable,name);
+            summaryadd = buildsummary(revtable,wbdata,angtable,maintable,name);
             summary = [summary;summaryadd];
             save(fullfile(folder_save,'Overall','summary.mat'),'summary')
         else
-            summary = buildsummary(revtable,wbdata,angtable,name);
+            summary = buildsummary(revtable,wbdata,angtable,maintable,name);
             save(fullfile(folder_save,'Overall','summary.mat'),'summary')
         end
 

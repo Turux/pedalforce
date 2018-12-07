@@ -1,4 +1,4 @@
-function [ summarytable ] = buildsummary( pedaltable, wbtable, angtable, name)
+function [ summarytable ] = buildsummary( pedaltable, wbtable, angtable, maintable, name)
 %SUMMARY Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -104,8 +104,8 @@ summarytable.MaxForceRightError = mean(angtable.TanForceRightNSD);
 summarytable.MaxForceRightAng = angtable.AngleSectorDeg(locs(1));
 summarytable.PowerSpread = mean(angtable.PowerWSD);
 
-summarytable.NormalisedPowerW = NP(pedaltable.PowerFilt30sW);
-summarytable.NormalisedPowerWError = sem(pedaltable.PowerFilt30sW);
+summarytable.NormalisedPowerW = NP(maintable.PowerFilt30sW);
+summarytable.NormalisedPowerWError = sem(maintable.PowerFilt30sW);
 
 
 clearvars AreaUPower AreaUPowerError locs widths proms pks ...

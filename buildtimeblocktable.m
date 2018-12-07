@@ -14,7 +14,7 @@ output.MaxPowerW = splitbytime(@max,timetable.PowerW,fs,s);
 output.MinPowerW = splitbytime(@min,timetable.PowerW,fs,s);
 output.ForceEffLeft = splitbytime(@mean,timetable.ForceEffLeft,fs,s);
 output.ForceEffRight = splitbytime(@mean,timetable.ForceEffRight,fs,s);
-output.NP = splitbytime(@NP, PowerFilt30sW,fs,s);
+output.NP = splitbytime(@NP, timetable.PowerFilt30sW,fs,s);
 
 clearvars cadence
 end
