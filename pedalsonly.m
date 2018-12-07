@@ -9,7 +9,6 @@ for k = 4:length(D) % avoid using the first ones
     currD = D(k).name; % Get the current subdirectory name
     folder_data=fullfile(folder_result,currD);
 
-    wbdata = wbimport(folder_data);
     rawdata = rawimport(folder_data);
     maintable = buildtimetable(rawdata, 500, 0.17);
     if exist(fullfile(folder_data,'error.mat'),'file')
@@ -51,38 +50,16 @@ for k = 4:length(D) % avoid using the first ones
     clearvars rawdata error ax1 ax2 ax3 prompt check; 
 
     [filepath,name] = fileparts(folder_data);
-    %folder_save = '/Users/turux/OneDrive - Loughborough University/eBike/WattBike Test/2018 Results';
+    
     if (exist(fullfile(folder_save,name),'dir') == 0)
         mkdir(folder_save,name);
     end
-    save(fullfile(folder_save,name,['PART' name '.mat']),'maintable','revtable','timetable','angtable','wbdata')
+    
+    save(fullfile(folder_save,name,['PART' name '.mat']),'maintable','revtable','timetable','angtable')
 
-    if (exist(fullfile(folder_save,'Overall'),'dir') == 0)
-        mkdir(folder_save,'Overall');
-        summary = buildsummary(revtable,wbdata,angtable,name);
-        save(fullfile(folder_save,'Overall','summary.mat'),'summary')
-    else
-        if (exist(fullfile(folder_save,'Overall','summary.mat'),'file') == 2)
-            load(fullfile(folder_save,'Overall','summary.mat'))
-            summaryadd = buildsummary(revtable,wbdata,angtable,name);
-            summary = [summary;summaryadd];
-            save(fullfile(folder_save,'Overall','summary.mat'),'summary')
-        else
-            summary = buildsummary(revtable,wbdata,angtable,name);
-            save(fullfile(folder_save,'Overall','summary.mat'),'summary')
-        end
-
-        clearvars summaryadd;
-    end
-
+    clearvars maintable revtable timetable angtable
+    
     clearvars filepath folder_data folder_name name ;
 end
-
-% if(exist(fullfile(folder_save,'Overall','Rresults.mat'),'file') == 2)
-%     load(fullfile(folder_save,'Overall','Rresults.mat'))
-%     Rresults = struct2table(Rresults);
-%     summary = [summary,Rresults];
-%     save(fullfile(folder_save,'Overall','summary.mat'),'summary')
-% end
 
 clearvars folder_result folder_save k D currD;

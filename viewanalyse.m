@@ -115,7 +115,7 @@ legend('Pedals','WattBike')
 ax2 = subplot(3,1,2);
 plot(wbdata.Cadencerpm)
 hold on
-plot(revtable.CadenceRPM)
+plot(newcadence)
 hold off
 title('Cadence(RPM)')
 ax3 = subplot(3,1,3);

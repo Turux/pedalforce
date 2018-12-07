@@ -56,20 +56,20 @@ summarytable.PedalSmoothnessAngRight = psRight;
 summarytable.TorqueEffectivenessAngLeft = teLeft;
 summarytable.TorqueEffectivenessAngRight = teRight;
 
-[ AreaUPower, AreaUPowerError,...
+[ AreaUTorque, AreaUTorqueError, ...
     AreaUMissing, AreaUMissingError,...
-    EfficiencyMinPower, EfficiencyMinPowerError,...
-    PowerAbove200, PowerAbove200Error,...
-    InefficientSectorPercentage, InefficientSectorPercentageError  ] = areaunder(angtable);
+    EfficiencyMinTorque, EfficiencyMinTorqueError,...
+    TorqueAbove20, TorqueAbove20Error,...
+    InefficientSectorPercentage, InefficientSectorPercentageError ] = areaunder(angtable);
 
-summarytable.AreaUPower = AreaUPower;
-summarytable.AreaUPowerError = AreaUPowerError;
+summarytable.AreaUTorque = AreaUTorque;
+summarytable.AreaUTorqueError = AreaUTorqueError;
 summarytable.AreaUMissing = AreaUMissing;
 summarytable.AreaUMissingError = AreaUMissingError;
-summarytable.EfficiencyMinPower = EfficiencyMinPower;
-summarytable.EfficiencyMinPowerError = EfficiencyMinPowerError;
-summarytable.PowerAbove200 = PowerAbove200;
-summarytable.PowerAbove200Error = PowerAbove200Error;
+summarytable.EfficiencyMinTorque = EfficiencyMinTorque;
+summarytable.EfficiencyMinTorqueError = EfficiencyMinTorqueError;
+summarytable.TorqueAbove20 = TorqueAbove20;
+summarytable.TorqueAbove20Error = TorqueAbove20Error;
 summarytable.InefficientSectorPercentage = InefficientSectorPercentage;
 summarytable.InefficientSectorPercentageError = InefficientSectorPercentageError;
 
