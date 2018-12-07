@@ -5,14 +5,16 @@ function [ output ] = buildtimeblocktable( timetable,fs,s )
 cadence = splitbytime(@mean,timetable.CadenceFiltRPM,fs,s);
 output = table(cadence, 'VariableNames', {'CadenceRPM'});
 output.TorqueNm = splitbytime(@mean,timetable.TorqueNm,fs,s);
+output.TorqueLeftNm = splitbytime(@mean,timetable.TorqueLeftNm,fs,s);
 output.PowerW = splitbytime(@mean,timetable.PowerW,fs,s);
-output.Balance = splitbytime(@mean,timetable.BalanceLR,fs,s);
+output.Balance = output.TorqueLeftNm./output.TorqueNm;
 output.MaxCadenceRPM = splitbytime(@max,timetable.CadenceRPM,fs,s);
 output.MinCadenceRPM = splitbytime(@min,timetable.CadenceRPM,fs,s);
 output.MaxPowerW = splitbytime(@max,timetable.PowerW,fs,s);
 output.MinPowerW = splitbytime(@min,timetable.PowerW,fs,s);
 output.ForceEffLeft = splitbytime(@mean,timetable.ForceEffLeft,fs,s);
 output.ForceEffRight = splitbytime(@mean,timetable.ForceEffRight,fs,s);
+output.NP = splitbytime(@NP, PowerFilt30sW,fs,s);
 
 clearvars cadence
 end

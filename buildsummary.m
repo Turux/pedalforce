@@ -5,29 +5,24 @@ function [ summarytable ] = buildsummary( pedaltable, wbtable, angtable, name)
 summarytable = table(str2double(name), 'VariableNames', {'Participant'});
 summarytable.Power = mean(pedaltable.PowerW);
 summarytable.PowerSEM = sem(pedaltable.PowerW);
-%summarytable.PowerSD = std(pedaltable.PowerW);
 summarytable.PowerWB = mean(wbtable.PowerW);
-%summarytable.PowerWBSD = std(wbtable.PowerW);
 summarytable.PowerWBSEM = sem(wbtable.PowerW);
 summarytable.Cadence = mean(pedaltable.CadenceRPM);
-%summarytable.CadenceSD = std(pedaltable.CadenceRPM);
 summarytable.CadenceSEM = sem(pedaltable.CadenceRPM);
 summarytable.CadenceWB = mean(wbtable.Cadencerpm);
-%summarytable.CadenceWBSD = std(wbtable.Cadencerpm);
 summarytable.CadenceWEBSEM = sem(wbtable.Cadencerpm);
 summarytable.Torque = mean(pedaltable.TorqueNm);
-%summarytable.TorqueSD = std(pedaltable.TorqueNm);
 summarytable.TorqueSEM = sem(pedaltable.TorqueNm);
 summarytable.TorqueWB = mean(wbtable.TorqueNm);
 summarytable.TorqueWBSEM = sem(wbtable.TorqueNm);
 summarytable.HeartRate = mean(wbtable.Heartratebpm);
-%summarytable.HeartRateSD = std(wbtable.Heartratebpm);
 summarytable.HeartRateSEM = sem(wbtable.Heartratebpm);
-summarytable.Balance = mean(pedaltable.Balance);
-%summarytable.BalanceSD = std(pedaltable.Balance);
-summarytable.BalanceSEM = sem(pedaltable.Balance);
+summarytable.Balance = mean(pedaltable.BalanceLR);
+summarytable.BalanceSEM = sem(pedaltable.BalanceLR);
+summarytable.BalanceAng = (mean(angtable.TorqueLeftNm))/(mean(angtable.TorqueNm)).*100;
+summarytable.BalanceangError = abs(summarytable.Balance/100)*((sem(angtable.TorqueLeftNm)/abs(mean(angtable.TorqueLeftNm)))+...
+    (sem(angtable.TorqueNm)/abs(mean(angtable.TorqueNm))));
 summarytable.BalanceWB = mean(wbtable.Leftlegpercent);
-%summarytable.BalanceWBSD = std(wbtable.Leftlegpercent);
 summarytable.BalanceWBSEM = sem(wbtable.Leftlegpercent);
 summarytable.FWHMLeft = mean(pedaltable.FWHMLeft);
 summarytable.FWHMLeftSEM = sem(pedaltable.FWHMLeft);
@@ -56,20 +51,20 @@ summarytable.PedalSmoothnessAngRight = psRight;
 summarytable.TorqueEffectivenessAngLeft = teLeft;
 summarytable.TorqueEffectivenessAngRight = teRight;
 
-[ AreaUTorque, AreaUTorqueError, ...
+[ AreaUPower, AreaUPowerError,...
     AreaUMissing, AreaUMissingError,...
-    EfficiencyMinTorque, EfficiencyMinTorqueError,...
-    TorqueAbove20, TorqueAbove20Error,...
-    InefficientSectorPercentage, InefficientSectorPercentageError ] = areaunder(angtable);
+    EfficiencyMinPower, EfficiencyMinPowerError,...
+    PowerAbove200, PowerAbove200Error,...
+    InefficientSectorPercentage, InefficientSectorPercentageError  ] = areaunder(angtable);
 
-summarytable.AreaUTorque = AreaUTorque;
-summarytable.AreaUTorqueError = AreaUTorqueError;
+summarytable.AreaUPower = AreaUPower;
+summarytable.AreaUPowerError = AreaUPowerError;
 summarytable.AreaUMissing = AreaUMissing;
 summarytable.AreaUMissingError = AreaUMissingError;
-summarytable.EfficiencyMinTorque = EfficiencyMinTorque;
-summarytable.EfficiencyMinTorqueError = EfficiencyMinTorqueError;
-summarytable.TorqueAbove20 = TorqueAbove20;
-summarytable.TorqueAbove20Error = TorqueAbove20Error;
+summarytable.EfficiencyMinPower = EfficiencyMinPower;
+summarytable.EfficiencyMinPowerError = EfficiencyMinPowerError;
+summarytable.PowerAbove200 = PowerAbove200;
+summarytable.PowerAbove200Error = PowerAbove200Error;
 summarytable.InefficientSectorPercentage = InefficientSectorPercentage;
 summarytable.InefficientSectorPercentageError = InefficientSectorPercentageError;
 
@@ -108,6 +103,9 @@ summarytable.MaxForceRight = pks(1);
 summarytable.MaxForceRightError = mean(angtable.TanForceRightNSD);
 summarytable.MaxForceRightAng = angtable.AngleSectorDeg(locs(1));
 summarytable.PowerSpread = mean(angtable.PowerWSD);
+
+summarytable.NormalisedPowerW = NP(pedaltable.PowerFilt30sW);
+summarytable.NormalisedPowerWError = sem(pedaltable.PowerFilt30sW);
 
 
 clearvars AreaUPower AreaUPowerError locs widths proms pks ...

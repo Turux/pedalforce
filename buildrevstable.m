@@ -3,18 +3,19 @@ function [ revstable ] = buildrevstable( timetable )
 %   Detailed explanation goes here
 
 revstable = table(unique(timetable.Revolution),'VariableNames', {'Revolution'});
-%revstable.Cadence = splitapply(@mean,timetable.CadenceRPM,timetable.Revolution);
+revstable.CadenceRads = splitapply(@mean,timetable.CadenceRads,timetable.Revolution);
 revstable.CadenceRPM =splitapply(@mean,timetable.CadenceFiltRPM,timetable.Revolution);
-revstable.PowerW = splitapply(@mean,timetable.PowerW,timetable.Revolution);
-revstable.PowerLeftW = splitapply(@mean,timetable.PowerLeftW,timetable.Revolution);
+revstable.TorqueNm = splitapply(@mean,timetable.TorqueNm,timetable.Revolution);
+revstable.TorqueLeftNm = splitapply(@mean,timetable.TorqueLeftNm,timetable.Revolution);
+revstable.TorqueRightNm = splitapply(@mean,timetable.TorqueRightNm,timetable.Revolution);
+revstable.PowerW = revstable.TorqueNm.*revstable.CadenceRads;
+revstable.PowerLeftW = revstable.TorqueLeftNm.*revstable.CadenceRPM;
 revstable.PowerLeftWSD = splitapply(@std,timetable.PowerLeftW,timetable.Revolution);
-revstable.PowerRightW = splitapply(@mean,timetable.PowerRightW,timetable.Revolution);
+revstable.PowerRightW = revstable.TorqueRightNm.*revstable.CadenceRPM;
 revstable.PowerRightWSD = splitapply(@std,timetable.PowerRightW,timetable.Revolution);
-revstable.PowerFiltW = splitapply(@mean,timetable.PowerFiltW,timetable.Revolution);
-revstable.Balance = splitapply(@mean,timetable.BalanceLR,timetable.Revolution);
+revstable.BalanceLR = (revstable.TorqueLeftNm./revstable.TorqueNm).*100;
 revstable.MaxCadenceRPM = splitapply(@max,timetable.CadenceFiltRPM,timetable.Revolution);
 revstable.MinCadenceRPM = splitapply(@min,timetable.CadenceFiltRPM,timetable.Revolution);
-revstable.TorqueNm = splitapply(@mean,timetable.TorqueNm,timetable.Revolution);
 revstable.MaxPowerW = splitapply(@max,timetable.PowerFiltW,timetable.Revolution);
 revstable.MinPowerW = splitapply(@min,timetable.PowerFiltW,timetable.Revolution);
 revstable.ForceEffLeft = splitapply(@mean,timetable.ForceEffLeft,timetable.Revolution);
