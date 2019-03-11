@@ -101,7 +101,7 @@ title('Area under the curve')
 
 clearvars Full Missing c y WOri WMissing WFull W120 W190 W275 W300
 
-[ newpower, diff, ci, mu ] = crossc( wbdata.PowerW, revtable.PowerFiltW );
+[ newpower, diff, ci, mu ] = crossc( wbdata.PowerW, revtable.PowerW );
 newcadence = crossc( wbdata.Cadencerpm, revtable.CadenceRPM );
 
 figure
@@ -123,7 +123,7 @@ plot(wbdata.Heartratebpm)
 title('Heart Rate (BPM)')
 linkaxes([ax1,ax2,ax3],'x')
 
-clearvars newpower newcadence diff ax1 ax2 ax3
+clearvars newpower newcadence ax1 ax2 ax3
 
 figure
 scatter3(revtable.TorqueNm, revtable.CadenceRPM, revtable.Revolution)

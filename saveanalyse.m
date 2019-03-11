@@ -5,7 +5,7 @@ clc
 folder_result = uigetdir('/','Where is the data?');
 D = dir(folder_result);
 folder_save = uigetdir('/','Where do you want to save the results?');
-for k = 3:length(D) % avoid using the first ones
+for k = 4:length(D) % avoid using the first ones
     currD = D(k).name; % Get the current subdirectory name
     folder_data=fullfile(folder_result,currD);
 

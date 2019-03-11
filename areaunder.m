@@ -6,7 +6,7 @@ function [ AreaUTorque, AreaUTorqueError, AreaUMissing, AreaUMissingError,...
 %   Detailed explanation goes 
 
 Torque20 = 200*ones(size(angtable.AngleSectorRad));
-TorqueU20 = angtable.PowerW;
+TorqueU20 = angtable.TorqueNm;
 TorqueU20(TorqueU20>20) = 20;
 MissingTorque = Torque20-TorqueU20;
 AreaUTorque = trapz(angtable.AngleSectorRad,angtable.TorqueNm);
