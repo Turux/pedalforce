@@ -51,20 +51,20 @@ summarytable.PedalSmoothnessAngRight = psRight;
 summarytable.TorqueEffectivenessAngLeft = teLeft;
 summarytable.TorqueEffectivenessAngRight = teRight;
 
-[ AreaUPower, AreaUPowerError,...
+[ AreaUTorque, AreaUTorqueError,...
     AreaUMissing, AreaUMissingError,...
     EfficiencyMinPower, EfficiencyMinPowerError,...
-    PowerAbove200, PowerAbove200Error,...
+    TorqueAbove20, TorqueAbove20Error,...
     InefficientSectorPercentage, InefficientSectorPercentageError  ] = areaunder(angtable);
 
-summarytable.AreaUPower = AreaUPower;
-summarytable.AreaUPowerError = AreaUPowerError;
+summarytable.AreaUTorque = AreaUTorque;
+summarytable.AreaUTorqueError = AreaUTorqueError;
 summarytable.AreaUMissing = AreaUMissing;
 summarytable.AreaUMissingError = AreaUMissingError;
 summarytable.EfficiencyMinPower = EfficiencyMinPower;
 summarytable.EfficiencyMinPowerError = EfficiencyMinPowerError;
-summarytable.PowerAbove200 = PowerAbove200;
-summarytable.PowerAbove200Error = PowerAbove200Error;
+summarytable.TorqueAbove20 = TorqueAbove20;
+summarytable.TorqueAbove20Error = TorqueAbove20Error;
 summarytable.InefficientSectorPercentage = InefficientSectorPercentage;
 summarytable.InefficientSectorPercentageError = InefficientSectorPercentageError;
 
@@ -103,6 +103,7 @@ summarytable.MaxForceRight = pks(1);
 summarytable.MaxForceRightError = mean(angtable.TanForceRightNSD);
 summarytable.MaxForceRightAng = angtable.AngleSectorDeg(locs(1));
 summarytable.PowerSpread = mean(angtable.PowerWSD);
+summarytable.PowerSpreadTest = mean(angtable.PowerWSD)/mean(angtable.PowerW);
 
 summarytable.NormalisedPowerW = NP(maintable.PowerFilt30sW);
 summarytable.NormalisedPowerWError = sem(maintable.PowerFilt30sW);

@@ -5,10 +5,13 @@ clc
 folder_result = uigetdir('/','Where is the data?');
 D = dir(folder_result);
 folder_save = uigetdir('/','Where do you want to save the results?');
+if (exist(fullfile(folder_save,'Overall'),'dir') == 7)
+    delete(fullfile(folder_save,'Overall','summary.mat'));
+end
 for k = 4:length(D) % avoid using the first ones
     currD = D(k).name; % Get the current subdirectory name
     folder_data=fullfile(folder_result,currD);
-
+    fprintf('Processing participant %d of %d\n',k-3,length(D)-3)
     wbdata = wbimport(folder_data);
     rawdata = rawimport(folder_data);
     maintable = buildtimetable(rawdata, 500, 0.17);
@@ -46,16 +49,26 @@ for k = 4:length(D) % avoid using the first ones
     revtable = buildrevstable(maintable);
     timetable = buildtimeblocktable(maintable,500,15);
     angtable = buildangletable(maintable);
+    
+    [~, ~, ~, ~, ~, diff ] = crossc( wbdata.TorqueNm, revtable.TorqueNm);
+    if (diff<0)
+        b=1+abs(diff);
+        from=find(maintable.Revolution==b,1);
+        l=(length(wbdata.TorqueNm)+1);
+        to=find(maintable.Revolution==(b+l-2),1);
+        revtable_short=revtable(b:l,:);
+        maintable_short=maintable(from:to,:);
+    end
 
 
-    clearvars rawdata error ax1 ax2 ax3 prompt check; 
+    clearvars rawdata error ax1 ax2 ax3 prompt check diff from to b l; 
 
     [filepath,name] = fileparts(folder_data);
-    %folder_save = '/Users/turux/OneDrive - Loughborough University/eBike/WattBike Test/2018 Results';
     if (exist(fullfile(folder_save,name),'dir') == 0)
         mkdir(folder_save,name);
     end
-    save(fullfile(folder_save,name,['PART' name '.mat']),'maintable','revtable','timetable','angtable','wbdata')
+    save(fullfile(folder_save,name,['PART' name '.mat']),'maintable',...
+        'revtable','timetable','angtable','wbdata','maintable_short','revtable_short')
 
     if (exist(fullfile(folder_save,'Overall'),'dir') == 0)
         mkdir(folder_save,'Overall');
