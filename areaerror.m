@@ -6,4 +6,3 @@ AreaError = sum(AreaError.^2);
 AreaError = sqrt(AreaError);
 
 end
-

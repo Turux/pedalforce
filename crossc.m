@@ -1,4 +1,4 @@
-function [ cutsignal, diff, ci, mu, stmu ] = crossc( s1, s2 )
+function [ cutsignal, diff, ci, mu, stmu, lagDiff ] = crossc( s1, s2 )
 
 % @Brief:   A function that executes and plot cross-correlation
 %           between two discrete series (1D arrays).
